@@ -1,0 +1,12 @@
+title: こがおニキに明日はない
+description: >
+  雑食系エンジニアが日々感じたことを綴ります。
+  仕事では Ruby, swift を書きつつ、趣味では Go をはじめ幅広く触っています。
+baseurl: ''
+url: 'https://zdogma.github.io/'
+twitter_username: z_dogma
+github_username:  zdogma
+
+# Build settings
+markdown: kramdown
+exclude: [vendor]
