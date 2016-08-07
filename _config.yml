@@ -10,3 +10,10 @@ github_username:  zdogma
 # Build settings
 markdown: kramdown
 exclude: [vendor]
+
+gems:
+  - jekyll-auto-image
+
+# Gem settings
+## jekyll-auto-image
+image: /images/default.jpg

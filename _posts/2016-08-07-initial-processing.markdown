@@ -3,6 +3,7 @@ layout: post
 title:  "Processing のサンプルを表示できるようにする"
 date:   2016-08-07 23:28:31 +0900
 categories: Processing
+image: /images/thumbnails/20160807.jpg
 ---
 
 例として、 [本家サイト](https://processing.org/examples/sinewave.html) にある SignWave を表示してみる。  
