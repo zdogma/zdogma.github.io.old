@@ -62,7 +62,7 @@ void renderWave() {
 
 ## ソースコード
 
-{% highlight processing %}
+{% highlight java %}
 int xspacing = 16;   // How far apart should each horizontal location be spaced
 int w;              // Width of entire wave
 
