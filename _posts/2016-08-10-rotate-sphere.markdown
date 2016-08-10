@@ -3,7 +3,7 @@ layout: post
 title:  "球体をゆっくり回してみた"
 date:   2016-08-10 23:38:15 +0900
 categories: Processing
-image: /images/thumbnails/20160810.gif
+image: /images/thumbnails/20160810.png
 ---
 
 そろそろ3Dの世界に足を踏み入れることにした。
