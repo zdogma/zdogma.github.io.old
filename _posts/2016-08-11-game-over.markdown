@@ -11,7 +11,7 @@ image: /images/thumbnails/20160811-3.png
 
 ## デモ
 
-![キャプション]({{site.baseurl}}/images/gifs/20160811-3.gif)
+<img src="{{site.baseurl}}/images/gifs/20160811-3.gif" width="100%">
 
 ※ 一部のメソッドがJSでは動かなかったので、Processing3で動かしたGIFを貼っています。
 
