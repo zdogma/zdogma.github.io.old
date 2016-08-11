@@ -1,0 +1,135 @@
+---
+layout: post
+title:  "ゲームオーバー画面をつくってみた"
+date:   2016-08-11 17:03:15 +0900
+categories: Processing
+image: /images/thumbnails/20160811-3.png
+---
+
+カスタム乱数を使って波形を作っていたつもりが、気づけばゲームオーバー画面になっていた。  
+グラディ◯スっぽい。
+
+## デモ
+
+![キャプション]({{site.baseurl}}/images/gifs/20160811-3.gif)
+
+※ 一部のメソッドがJSでは動かなかったので、Processing3で動かしたGIFを貼っています。
+
+## ソースコード
+
+{% highlight java %}
+int sizeX = 500;
+int sizeY = 500;
+int centX = sizeX/2;
+int centY = sizeY/2;
+int radius = 50;
+int starCount = 100;
+StarManager _starManager;
+
+void setup() {
+  size(500, 500);
+  frameRate(12);
+
+  _starManager = new StarManager(sizeX, sizeY);
+}
+
+void draw() {
+  background(#000000);
+  drawText("GAME OVER");
+  drawStars();
+  drawRing(centX, centY, radius*1.5);
+  drawSun();
+}
+
+class StarManager {
+  float windowX, windowY;
+  Star [] stars = new Star[starCount];
+
+  StarManager(float x, float y) {
+    windowX = x;
+    windowY = y;
+
+    for (int i = 0; i < stars.length; i++) {
+      stars[i] = new Star(random(windowX), random(windowY));
+    }
+  }
+
+  void setStars() {
+    for (int i = 0; i < stars.length; i++) {
+      stars[i].drawMe();
+    }
+  }
+}
+
+class Star {
+  float positionX, positionY;
+
+  Star(float x, float y) {
+    positionX = x;
+    positionY = y;
+  }
+
+  void drawMe() {
+    stroke(#ffffff);
+    point(positionX, positionY);
+  }
+}
+
+void drawText(String text) {
+  textSize(70);
+  fill(#ffffff);
+  textAlign(CENTER);
+  text(text, centX, centY*1.6);
+}
+
+void drawRing(int centX, int centY, float radius) {
+  strokeWeight(5);
+  stroke(#ffffff, 10);
+  fill(#ffffff, 0);
+  ellipse(centX, centY, radius*2, radius*2);
+}
+
+void drawStars() {
+  _starManager.setStars();
+}
+
+void drawSun() {
+  noStroke();
+  strokeWeight(1);
+  float x, y;
+  float noiseValue = random(10);
+  float radiusVaraince, thisRadius, radian;
+
+  beginShape();
+  fill(#ffff40, 100);
+  for (float angle = 0; angle <= 360; angle++) {
+    noiseValue += 0.1;
+    radiusVaraince = 300 * customNoise(noiseValue);
+
+    thisRadius = radius + radiusVaraince;
+    radian = radians(angle);
+    x = centX + (thisRadius * cos(radian));
+    y = centY + (thisRadius * sin(radian));
+
+    curveVertex(x, y);
+  }
+  endShape();
+}
+
+float customNoise(float value) {
+  return pow(random(1), 5);
+}
+
+{% endhighlight %}
+
+## メモ
+* [beginShape()](https://processing.org/reference/beginShape_.html)
+  - Using the beginShape() and endShape() functions allow creating more complex forms. beginShape() begins recording vertices for a shape and endShape() stops recording.
+    - 図形のレコーディング開始。
+* [engShape()](https://processing.org/reference/endShape_.html)
+  - The endShape() function is the companion to beginShape() and may only be called after beginShape().
+    - 図形のレコーディング終了。
+* [curveVertex()](https://processing.org/reference/curveVertex_.html)
+  - Specifies vertex coordinates for curves.
+    - 頂点を曲線で繋ぐ。
+      - beginShape と endShape の間でのみ有効。
