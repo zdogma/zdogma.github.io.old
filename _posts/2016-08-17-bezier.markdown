@@ -1,0 +1,84 @@
+---
+layout: post
+title:  "ベジエ曲線による線画"
+date:   2016-08-17 23:11:15 +0900
+categories: Processing
+image: /images/thumbnails/20160817.png
+---
+
+ベジエ曲線が Processing でも使えると知ったので、早速書いた。
+
+ベースは [公式サンプル](https://processing.org/examples/bezier.html) から取ってきてほぼそのままだが、  
+Anchor Point と Control Point のみ円表示してわかりやすくしてみた。
+
+## デモ
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.4.8/processing.min.js"></script>
+<script type="text/processing" data-processing-target="processing-canvas">
+int radius = 10;
+
+int secondX = 410;
+int secondY = 20;
+
+int thirdX = 440;
+int thirdY = 300;
+
+void setup() {
+  size(640, 360);
+  stroke(255);
+}
+
+void draw() {
+  background(0);
+  for (int i = 0; i < 200; i += 20) {
+    noFill();
+    bezier(mouseX-(i/2.0), 40+i, secondX, secondY, thirdX, thirdY, 240-(i/16.0), 300+(i/8.0));
+
+    fill(i);
+    ellipse(mouseX-(i/2.0), 40+i, radius, radius);
+    ellipse(secondX, secondY, radius, radius);
+    ellipse(thirdX, thirdY, radius, radius);
+    ellipse(240-(i/16.0), 300+(i/8.0), radius, radius);
+  }
+}
+
+</script>
+<div>
+  <canvas id="processing-canvas" class="canvas" width="200px" height="200px"></canvas>
+</div>
+
+## ソースコード
+
+{% highlight java %}
+int radius = 10;
+
+int secondX = 410;
+int secondY = 20;
+
+int thirdX = 440;
+int thirdY = 300;
+
+void setup() {
+  size(640, 360);
+  stroke(255);
+}
+
+void draw() {
+  background(0);
+  for (int i = 0; i < 200; i += 20) {
+    noFill();
+    bezier(mouseX-(i/2.0), 40+i, secondX, secondY, thirdX, thirdY, 240-(i/16.0), 300+(i/8.0));
+
+    fill(i);
+    ellipse(mouseX-(i/2.0), 40+i, radius, radius);
+    ellipse(secondX, secondY, radius, radius);
+    ellipse(thirdX, thirdY, radius, radius);
+    ellipse(240-(i/16.0), 300+(i/8.0), radius, radius);
+  }
+}
+
+{% endhighlight %}
+
+## メモ
+* [bezier()](https://processing.org/reference/bezier_.html)
+  - Draws a Bezier curve on the screen.
